@@ -5,7 +5,7 @@ nginx:
   volumes:
     - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
   ports:
-    - 80:80
+    - 127.0.0.1:80:80
 heka:
   image: ianneub/heka:latest
   volumes:
