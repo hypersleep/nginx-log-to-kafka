@@ -1,0 +1,12 @@
+[KafkaInput]
+type = "KafkaInput"
+topic = "Snowplow"
+addrs = ["kafka:9092"]
+wait_for_election = 3000
+offset_method = "Manual"
+
+[PayloadEncoder]
+
+[LogOutput]
+message_matcher = "TRUE"
+encoder = "PayloadEncoder"

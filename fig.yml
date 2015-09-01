@@ -1,0 +1,38 @@
+nginx:
+  image: nginx:latest
+  links:
+    - "heka"
+  volumes:
+    - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+  ports:
+    - 80:80
+heka:
+  image: ianneub/heka:latest
+  volumes:
+    - ./heka/config.toml:/app/config.toml
+  expose:
+    - "514/udp"
+    - "514"
+  links:
+    - "kafka"
+zookeeper:
+  image: wurstmeister/zookeeper:latest
+  ports:
+    - "2181:2181"
+kafka:
+  image: wurstmeister/kafka:latest
+  ports:
+    - "9092:9092"
+  links:
+    - zookeeper:zk
+  environment:
+    KAFKA_ADVERTISED_HOST_NAME: 192.168.0.103
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+# hekaconsumer:
+#   image: ianneub/heka:latest
+#   volumes:
+#     - ./heka/config-consumer.toml:/app/config.toml
+#   links:
+#     - "kafka"
+

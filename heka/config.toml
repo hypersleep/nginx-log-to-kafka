@@ -1,0 +1,23 @@
+[UdpInput]
+address = "0.0.0.0:514"
+splitter = "NullSplitter"
+decoder = "RsyslogDecoder"
+
+[RsyslogDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/rsyslog.lua"
+
+[RsyslogDecoder.config]
+type = "RSYSLOG_TraditionalForwardFormat"
+template = '<%PRI%>%TIMESTAMP% %HOSTNAME% %syslogtag:1:32%%msg:::sp-if-no-1st-sp%%msg%'
+
+[PayloadEncoder]
+
+[KafkaOutput]
+type = "KafkaOutput"
+message_matcher = "Logger == 'UdpInput'"
+topic = "Snowplow"
+addrs = ["kafka:9092"]
+encoder = "PayloadEncoder"
+wait_for_election = 3000
+
