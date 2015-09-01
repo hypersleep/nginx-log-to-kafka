@@ -29,10 +29,10 @@ kafka:
     KAFKA_ADVERTISED_HOST_NAME: 192.168.0.103
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-# hekaconsumer:
-#   image: ianneub/heka:latest
-#   volumes:
-#     - ./heka/config-consumer.toml:/app/config.toml
-#   links:
-#     - "kafka"
+hekaconsumer:
+  image: ianneub/heka:latest
+  volumes:
+    - ./heka/config-consumer.toml:/app/config.toml
+  links:
+    - "kafka"
 
