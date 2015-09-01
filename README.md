@@ -7,4 +7,4 @@ Docker environment for streaming Nginx logs to Apache Kafka using Mozilla Heka.
 
 3.Try to send some data to Nginx container: `curl -X POST -D- http://127.0.0.1/stats -d 'test1'`
 
-4. Enjoy your Heka can print consumed messages from Apache Kafka :)
+4.Enjoy your Heka can print consumed messages from Apache Kafka :)
